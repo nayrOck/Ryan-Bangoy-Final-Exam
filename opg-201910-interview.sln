@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.29519.87
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "opg-201910-interview", "opg-201910-interview.csproj", "{6BB5B2E5-0C26-4541-AD5A-006A4B968935}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitTestProject1", "..\XUnitTestProject1\XUnitTestProject1.csproj", "{8B4ED108-F593-4171-B1CD-C53D2F5A979B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XUnitTestProject1", "..\XUnitTestProject1\XUnitTestProject1.csproj", "{8B4ED108-F593-4171-B1CD-C53D2F5A979B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

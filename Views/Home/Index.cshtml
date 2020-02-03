@@ -1,8 +1,22 @@
-﻿@model  IEnumerable<opg_201910_interview.Models.Client>
+﻿@model IEnumerable<opg_201910_interview.Models.Client>
 @{
     ViewData["Title"] = "Home Page";
 }
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    <div>
+        <div class="col-md-4">
 
+            @Html.DropDownList("ClientList",
+                     new SelectList(Enum.GetValues(typeof(ClientList))),null,
+                     new { @class = "form-control" })
+        </div>
+        <div class="col-md-6">
+
+            <input type="submit" value="submit" action="Index" />
+        </div>
+    </div>
+}
     <div>
         <table class="table table-striped">
             <thead>
@@ -30,26 +44,26 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                <tr>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Sort)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Name)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Id)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FileName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FileDate)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FileDirectoryPath)
-                    </td>
-                </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sort)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FileName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FileDate)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FileDirectoryPath)
+                        </td>
+                    </tr>
                 }
             </tbody>
         </table>
@@ -58,7 +72,7 @@
     <div>
         <table class="table table-striped">
             <thead>
-                <tr>                   
+                <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.JSONFile)
                     </th>
