@@ -31,49 +31,31 @@ namespace opg_201910_interview.Controllers
         //[ProducesResponseType(typeof(Client), StatusCodes.Status200OK)]
         public IActionResult Index(Client client)
         {
-            List<Client> clients = new List<Client>();
-            List<FileMode> jsonfiles = new List<FileMode>();
-            DirectoryInfo d = new DirectoryInfo(_host.ContentRootPath + @"\UploadFiles\" + client.ClientList);
-            int s = 1;
+            var iFile = new ImportUtility();            
 
-            if (d.Exists)
-            {
-                FileInfo[] files = d.GetFiles("*.xml");
-                var obj = files.ToList();
-                foreach (FileInfo file in files)
-                {
-                    var iFile = new ImportUtility();
-                    string fileName = Path.GetFileNameWithoutExtension(file.Name);
-                    var x = iFile.ValidateFilenameDate( fileName);
-                    if (x.FileDate != null)
-                    {
-                        var xj = (new { Client = d.Name, Id = x.Id, FileName = fileName, FileDirectoryPath = file.DirectoryName, FileDate = x.FileDate });
-                        clients.Add(new Client { Sort = s, Name = d.Name, Id = x.Id, FileName = fileName, FileDirectoryPath = file.DirectoryName, FileDate = x.FileDate, JSONFile = iFile.ConvertToJSON(xj), FileDateFormat = x.FileDateFormat });
-                        s++;
-
-                    }
-                }
-                
-            }
+            var clientFiles = iFile.ReadXMLFile(_host.ContentRootPath, client.ClientList.ToString());
+            List<Client> outputFiles = new List<Client>();
 
             if (client.ClientList.ToString() == "ClientA")
             {
-                var outputFiles = clients.FindAll(c => c.FileDateFormat == (from item in clients
-                                                                            group item.FileDateFormat by item.FileDateFormat into g
+                var sortFiles = clientFiles.FindAll(c => c.FileDateFormat == (from item in clientFiles
+                                                                                group item.FileDateFormat by item.FileDateFormat into g
                                                                             orderby g.Count() descending
                                                                             select g.Key).First().ToString()).OrderBy(n => Convert.ToDateTime(n.FileDate).ToString("yyyy")).ThenBy(c => Convert.ToDateTime(c.FileDate).ToString("MM"));
+                outputFiles = sortFiles.ToList();
 
-                return View(outputFiles);
             }
             else
             {
-                var outputFiles = clients.FindAll(c => c.FileDateFormat == (from item in clients
-                                                                            group item.FileDateFormat by item.FileDateFormat into g
+                var sortFiles = clientFiles.FindAll(c => c.FileDateFormat == (from item in clientFiles
+                                                                                group item.FileDateFormat by item.FileDateFormat into g
                                                                             orderby g.Count() descending
                                                                             select g.Key).First().ToString()).OrderByDescending(c => c.FileName);
+                outputFiles = sortFiles.ToList();
 
-                return View(outputFiles);
             }
+
+            return View(outputFiles);
 
         }      
 
