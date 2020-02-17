@@ -17,7 +17,8 @@ namespace opg_201910_interview.Models
         public string FileDate { get; set; }
         public string FileDateFormat { get; set; }
         public string JSONFile { get; set; }
-        public ClientList ClientList { get; set; }        
+        public ClientList ClientList { get; set; }
+        
     }
 
     public enum ClientList

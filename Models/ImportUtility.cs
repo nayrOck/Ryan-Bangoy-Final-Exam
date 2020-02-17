@@ -40,7 +40,9 @@ namespace opg_201910_interview.Models
             else
             {
                 clients = null;
-            }                
+            }
+
+                
             return clients;
         }
 
@@ -64,6 +66,7 @@ namespace opg_201910_interview.Models
                 obj.FileDateFormat = "yyyyMMdd";
                 obj.FileDate = DateTime.ParseExact(match2.Value, "yyyyMMdd", CultureInfo.InvariantCulture).ToString("yyyy-MM-dd");
             }
+
             return obj;
         }
 
