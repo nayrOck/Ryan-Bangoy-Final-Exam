@@ -12,7 +12,6 @@ namespace opg_201910_interview.Controllers
 {
     public class HomeController : Controller
     {
-        //private readonly ILogger<HomeController> _logger;
         private readonly IHostingEnvironment _host;
 
         public HomeController(IHostingEnvironment hosting)
